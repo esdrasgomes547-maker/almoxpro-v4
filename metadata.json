@@ -1,0 +1,10 @@
+{
+  "name": "AlmoxPro v3 - TESTE UI",
+  "description": "Sistema profissional de logística e controle de estoque de GLP",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

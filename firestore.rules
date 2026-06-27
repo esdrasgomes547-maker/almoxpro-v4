@@ -1,0 +1,76 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helpers ---
+    function isSignedIn() { return request.auth != null; }
+    
+    function isValidId(id) { 
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); 
+    }
+    
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    function isMaster() { 
+      return isSignedIn() && 
+             request.auth.token != null && 
+             (request.auth.token.email == 'esdrasgomes547@gmail.com' ||
+              (request.auth.token.email_verified == true && exists(/databases/$(database)/documents/masters/$(request.auth.token.email))));
+    }
+    
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    function isOrgMember(orgId) {
+      return orgId == 'demo-org' || 
+             orgId.matches('^demo-.*') || 
+             isMaster() || 
+             (isSignedIn() && 
+              exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+              get(/databases/$(database)/documents/users/$(request.auth.uid)).data.orgId == orgId);
+    }
+
+    // --- Rules ---
+    match /test/connection {
+      allow read: if true;
+    }
+
+    match /users/{uid} {
+      allow read: if isMaster() || (isSignedIn() && request.auth.uid == uid);
+      allow create: if (isSignedIn() && request.auth.uid == uid && 
+                       incoming().keys().hasAll(['orgId', 'role', 'plan', 'email']) &&
+                       incoming().role != 'admin') || isMaster();
+      allow update: if isMaster() || (isSignedIn() && request.auth.uid == uid && 
+                      incoming().diff(existing()).affectedKeys().hasOnly(['orgId', 'email']));
+    }
+
+    match /masters/{email} {
+      allow read: if isMaster();
+      allow write: if isMaster();
+    }
+
+    match /organizations/tecgas-master/{document=**} {
+      allow read, write: if true;
+    }
+
+    match /organizations/{orgId} {
+      // Allow read/write for master user or organization members
+      allow read, write: if isMaster() || isOrgMember(orgId);
+
+      match /inventory/{sku} {
+        allow read: if true;
+      }
+
+      match /{document=**} {
+        allow read, write: if isMaster() || isOrgMember(orgId);
+      }
+    }
+  }
+}

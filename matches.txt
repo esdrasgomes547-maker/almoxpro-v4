@@ -1,0 +1,66 @@
+95:  const [accentColor, setAccentColor] = useState<"none" | "indigo" | "amber" | "emerald" | "rose" | "slate">("none");
+939:          case 'amber': return [245, 158, 11];
+940:          case 'emerald': return [16, 185, 129];
+941:          case 'rose': return [244, 63, 94];
+1494:      const statusSymbol = item.qty <= (item.minQty ?? 0) ? '🚨' : '✅';
+2070:      case 'WARNING': return <Badge variant="secondary" className="bg-amber-100 text-amber-800 hover:bg-amber-200">Atenção</Badge>;
+2617:                  if (p.includes("epi") || p.includes("segurança") || p.includes("proteção")) return "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20";
+2618:                  if (p.includes("ferramenta") || p.includes("máquina") || p.includes("construção") || p.includes("ferro")) return "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20";
+2620:                  if (p.includes("eletro") || p.includes("fio") || p.includes("tecnologia")) return "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/20";
+2748:                          <span className="inline-flex items-center gap-1.5 px-2 py-1 text-[10px] font-semibold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/10 rounded-full animate-pulse">
+2753:                          <span className="inline-flex items-center gap-1 px-2 py-1 text-[10px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/10 rounded-full">
+2754:                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+2832:                    isLowStock ? "border-amber-500/30 bg-amber-500/[0.02]" : "border-border/60"
+2844:                        <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-amber-500 rounded-full ring-2 ring-background animate-pulse" />
+2858:                          isLowStock ? "text-amber-600" : "text-emerald-600"
+2967:                  <MessageSquare className="h-3.5 w-3.5 mr-1 text-green-500" /> WhatsApp
+2992:                  background: "linear-gradient(135deg, rgba(245,158,11,0.15), rgba(0,196,122,0.15))",
+2993:                  border: "0.5px solid rgba(245,158,11,0.3)",
+2998:                <ArrowDownRight style={{ width: 14, height: 14, color: "#f59e0b" }} />
+3000:                <RotateCcw style={{ width: 13, height: 13, color: "#00c47a" }} />
+3586:                         className={newMovement.type === "IN" ? "bg-emerald-600 hover:bg-emerald-700 h-10" : "h-10 border-dashed"}
+3594:                         className={newMovement.type === "OUT" ? "bg-amber-600 hover:bg-amber-700 h-10" : "h-10 border-dashed"}
+3659:                              <div className="flex items-center text-emerald-600 font-medium text-xs">
+3663:                              <div className="flex items-center text-amber-600 font-medium text-xs">
+3672:                            <span className={mov.type === 'IN' ? 'text-emerald-600' : 'text-amber-600'}>
+4078:                ? "linear-gradient(135deg, rgba(245,158,11,0.2), rgba(245,158,11,0.05))"
+4079:                : "linear-gradient(135deg, rgba(0,196,122,0.2), rgba(0,196,122,0.05))",
+4080:              border: `0.5px solid ${outputModalMode === "saida" ? "rgba(245,158,11,0.4)" : "rgba(0,196,122,0.4)"}`,
+4085:                ? <ArrowDownRight style={{ width: 17, height: 17, color: "#f59e0b" }} />
+4086:                : <RotateCcw style={{ width: 17, height: 17, color: "#00c47a" }} />
+4115:              ? "linear-gradient(135deg, rgba(245,158,11,0.25), rgba(245,158,11,0.1))"
+4116:              : "linear-gradient(135deg, rgba(0,196,122,0.25), rgba(0,196,122,0.1))",
+4117:            border: `0.5px solid ${outputModalMode === "saida" ? "rgba(245,158,11,0.4)" : "rgba(0,196,122,0.4)"}`,
+4121:            style={{ flex: 1, padding: "9px 0", borderRadius: 9, border: "none", background: "transparent", color: outputModalMode === "saida" ? "#f59e0b" : "#4a7a9b", fontSize: 13, fontWeight: outputModalMode === "saida" ? 700 : 400, cursor: "pointer", position: "relative", zIndex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, transition: "color 0.2s" }}>
+4126:            style={{ flex: 1, padding: "9px 0", borderRadius: 9, border: "none", background: "transparent", color: outputModalMode === "retorno" ? "#00c47a" : "#4a7a9b", fontSize: 13, fontWeight: outputModalMode === "retorno" ? 700 : 400, cursor: "pointer", position: "relative", zIndex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, transition: "color 0.2s" }}>
+4152:          <input type="text" placeholder="🔍 Buscar produto..."
+4180:                  <p style={{ fontSize: 18, fontWeight: 700, color: isLow ? "#e24b4a" : "#00c47a", margin: 0 }}>{prod.qty}</p>
+4230:                { value: "Montagem", label: "🔧 Montagem" },
+4231:                { value: "Preventiva", label: "🛡️ Preventiva" },
+4232:                { value: "Corretiva", label: "⚡ Corretiva" },
+4233:                { value: "Calibração", label: "🎯 Calibração" },
+4234:                { value: "Preditiva", label: "🔍 Preditiva" },
+4235:                { value: "Outras", label: "📋 Outras" },
+4238:                  style={{ padding: "6px 12px", borderRadius: 20, border: `0.5px solid ${outputActivity === opt.value ? "rgba(245,158,11,0.5)" : "rgba(255,255,255,0.08)"}`, background: outputActivity === opt.value ? "rgba(245,158,11,0.12)" : "rgba(255,255,255,0.03)", color: outputActivity === opt.value ? "#f59e0b" : "#4a7a9b", fontSize: 12, fontWeight: outputActivity === opt.value ? 600 : 400, cursor: "pointer", transition: "all 0.15s" }}>
+4245:                style={{ width: "100%", marginTop: 10, padding: "10px 14px", borderRadius: 10, background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(245,158,11,0.3)", color: "#e8f4ff", fontSize: 13, outline: "none", boxSizing: "border-box", animation: "fadeIn 0.2s ease" }} />
+4272:                  ? "linear-gradient(135deg, #f59e0b, #d97706)"
+4273:                  : "linear-gradient(135deg, #00c47a, #059669)",
+4375:                                <span className="bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 text-[9px] font-black uppercase px-1.5 py-0.5 rounded leading-none">
+4383:                              {p.type === 'Rede / IP' && <Cpu className="h-3 w-3 text-emerald-500" />}
+4421:                    <Check className="h-3.5 w-3.5 text-emerald-500" />
+4529:                <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-600">
+4677:                    className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold gap-2"
+5205:                            <X className="h-4 w-4 text-rose-500" />
+5218:                            onClick={() => setAccentColor("amber")}
+5220:                              "h-10 rounded-xl border cursor-pointer transition-all flex items-center justify-center bg-amber-500 hover:scale-105",
+5221:                              accentColor === "amber" ? "border-black ring-4 ring-amber-500/30" : "border-transparent"
+5227:                            onClick={() => setAccentColor("emerald")}
+5229:                              "h-10 rounded-xl border cursor-pointer transition-all flex items-center justify-center bg-emerald-500 hover:scale-105",
+5230:                              accentColor === "emerald" ? "border-black ring-4 ring-emerald-500/30" : "border-transparent"
+5236:                            onClick={() => setAccentColor("rose")}
+5238:                              "h-10 rounded-xl border cursor-pointer transition-all flex items-center justify-center bg-rose-500 hover:scale-105",
+5239:                              accentColor === "rose" ? "border-black ring-4 ring-rose-500/30" : "border-transparent"
+5471:                        amber: "bg-amber-500",
+5472:                        emerald: "bg-emerald-500",
+5473:                        rose: "bg-rose-500",
+5617:                        <span className="bg-emerald-500/10 text-emerald-500 font-black text-[8px] px-1.5 py-0.5 rounded-full uppercase shrink-0 font-sans">

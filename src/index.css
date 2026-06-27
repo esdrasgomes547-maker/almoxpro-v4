@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Unbounded:wght@700;800;900&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@700;800;900&family=Sora:wght@700;800&family=Bricolage+Grotesque:opsz,wght@12..96,750;12..96,800&family=Instrument+Sans:wght@700;800;900&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Outfit', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-unbounded: 'Unbounded', 'Syne', sans-serif;
+  --font-syne: 'Syne', sans-serif;
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+  --font-sora: 'Sora', sans-serif;
+  --font-corporate: 'Bricolage Grotesque', sans-serif;
+  --font-instrument: 'Instrument Sans', sans-serif;
+
+  @keyframes scan-line {
+    0% { top: 10%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 90%; opacity: 0; }
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 98%; /* Very light gray */
+    --foreground: 214 72% 10%;  /* Very dark blue text */
+    --card: 0 0% 100%;
+    --card-foreground: 214 72% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 214 72% 10%;
+    --primary: 214 74% 20%; /* AlmoxPro Dark Blue */
+    --primary-foreground: 0 0% 100%; /* White */
+    --secondary: 196 100% 47%; /* AlmoxPro Cyan */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 214 20% 95%; /* Light blue-gray for muted backgrounds */
+    --muted-foreground: 214 15% 45%; 
+    --accent: 196 100% 96%; /* Very light cyan */
+    --accent-foreground: 214 74% 20%; /* Dark blue on accent */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 214 74% 20%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 214 60% 6%; /* Deep dark blue background */
+    --foreground: 210 40% 98%;
+    --card: 214 55% 8%; /* Slightly lighter dark blue for cards */
+    --card-foreground: 210 40% 98%;
+    --popover: 214 55% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 196 100% 47%; /* Cyan becomes primary for better dark contrast */
+    --primary-foreground: 214 74% 15%; /* Dark blue on primary */
+    --secondary: 214 74% 20%; /* Dark blue as secondary */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 214 40% 12%; 
+    --muted-foreground: 214 20% 65%;
+    --accent: 214 40% 18%; /* Dark accents */
+    --accent-foreground: 196 100% 47%; /* Cyan text on accent */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 30% 15%;
+    --input: 214 30% 15%;
+    --ring: 196 100% 47%;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))] antialiased;
+    overflow-x: hidden;
+    touch-action: manipulation;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    height: 100%;
+    width: 100%;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-[hsl(var(--foreground))];
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+
+  button, 
+  a, 
+  [role="button"] {
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Prevent auto-zooming on focus on small devices in iOS (Safari) */
+  @media screen and (max-width: 1024px) {
+    input, 
+    select, 
+    textarea {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Smooth performance on scrolled lists on touch devices */
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Performance optimizations */
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.optimize-gpu {
+  will-change: transform, opacity;
+}
+
+.hide-scrollbar::-webkit-scrollbar, .scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar, .scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.2);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
+
+/* iOS Safari and Modern Mobile safe area & dynamic viewport height utilities */
+/* Universal class selectors and tailwind utilities for absolute cross-compiler safety on iOS */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.h-layout-screen {
+  height: 100vh;
+  height: 100dvh;
+}
+
+.pb-mobile-safe {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 16px));
+}
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+@utility h-layout-screen {
+  height: 100vh;
+  height: 100dvh;
+}
+
+@utility pb-mobile-safe {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 16px));
+}
+
+@keyframes textShine {
+  0% {
+    background-position: 250% center;
+  }
+  100% {
+    background-position: -150% center;
+  }
+}
+
+.animate-premium-shine {
+  background-image: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.95) 30%,
+    rgba(255, 255, 255, 1) 42%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 1) 58%,
+    rgba(255, 255, 255, 0.95) 70%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShine 10s ease-in-out infinite;
+  display: inline-block;
+}
+
+.animate-colored-shine {
+  background-image: linear-gradient(
+    115deg,
+    #0099ff 0%,
+    #00c8ff 22%,
+    #3b82f6 40%,
+    #ffffff 50%,
+    #3b82f6 60%,
+    #0055ff 78%,
+    #0033bb 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShine 8s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* Premium Ultra-Lightweight Hardware Acceleration & Layout Stability */
+.force-gpu {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
+}
+
+/* Global Mobile Interaction and Scrolling Performance Upgrades */
+html, body {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fast Webkit Touch Scrolling Acceleration */
+.overflow-y-auto, .overflow-x-auto, .scrollable {
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* System-Wide Low Spec / Pocket Mode Auto-Adaptation */
+.ultra-perf-mode * {
+  animation-duration: 0.015s !important;
+  animation-delay: 0s !important;
+  transition-duration: 0.015s !important;
+  transition-delay: 0s !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  will-change: auto !important;
+}
+
+.ultra-perf-mode .animate-premium-shine,
+.ultra-perf-mode .animate-colored-shine {
+  animation: none !important;
+  background-image: none !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: currentcolor !important;
+  color: inherit !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .force-gpu {
+    will-change: auto;
+    transform: none !important;
+  }
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
